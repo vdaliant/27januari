@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27 JANUARI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            color: white;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .surat {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+        .surat img {
+            width: 150px;
+            transition: transform 0.3s;
+        }
+        .surat img:hover {
+            transform: scale(1.1);
+        }
+        .isi-surat {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .isi-surat.show {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        .floating-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .floating-images img {
+            position: absolute;
+            width: 100px;
+            opacity: 0.7;
+            animation: float 10s infinite linear;
+        }
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(-10vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Klik Surat untuk Membuka</h1>
+    
+    <audio id="background-music" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    <button onclick="playMusic()" style="margin-bottom: 20px; padding: 10px; border: none; background: white; color: #ff5f6d; border-radius: 5px; cursor: pointer;">Play 🎵</button>
+    
+    <div class="surat" onclick="toggleSurat(this)">
+        <img src="surat.jpg" alt="Surat">
+        <div class="isi-surat">semoga nanti ada doa aku yang mampu meluluhkan hati kamu ti, dan buat kamu balik lagi sama aku. tetaplah abadi dalam kenangan yang indah, aku udah menerima kalo kita udah ga bisa bersama lagi. aku gaakan cari pengganti kamu, aku akan bakal tetep nepatin janji aku skrg klo aku cinta sama kamu. tapi jika suatu saat aku liat kamu mencintai seseorang. maka janji aku selesai. 😊</div>
+    </div>
+    
+    <div class="floating-images"></div>
+    
+    <script>
+        function toggleSurat(element) {
+            let isiSurat = element.querySelector(".isi-surat");
+            if (isiSurat.classList.contains("show")) {
+                isiSurat.classList.remove("show");
+                setTimeout(() => { isiSurat.style.display = "none"; }, 300);
+            } else {
+                isiSurat.style.display = "block";
+                setTimeout(() => { isiSurat.classList.add("show"); }, 10);
+            }
+        }
+
+        function createFloatingImages() {
+            const container = document.querySelector(".floating-images");
+            for (let i = 0; i < 10; i++) {
+                let img = document.createElement("img");
+                img.src = "FOTO2.jpeg";
+                img.style.left = Math.random() * 100 + "vw";
+                img.style.animationDuration = (Math.random() * 5 + 5) + "s";
+                container.appendChild(img);
+            }
+        }
+        createFloatingImages();
+
+        function playMusic() {
+            let music = document.getElementById("background-music");
+            music.play();
+        }
+    </script>
+</body>
+</html>
